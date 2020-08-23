@@ -26,7 +26,7 @@ var __asyncValues = (this && this.__asyncValues) || function (o) {
     function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.githubClient = exports.processFileLines = exports.d = exports.conf = exports.WeeklyVerHeader = exports.SemverHeader = exports.ChangelogHeader = void 0;
+exports.githubClient = exports.processFileLines = exports.d = exports.memoize = exports.conf = exports.WeeklyVerHeader = exports.SemverHeader = exports.ChangelogHeader = void 0;
 const github = __importStar(require("@actions/github"));
 const readline = __importStar(require("readline"));
 const core = __importStar(require("@actions/core"));
@@ -99,6 +99,7 @@ function memoize(callback) {
         return value;
     };
 }
+exports.memoize = memoize;
 function d(...args) {
     for (const arg of args) {
         console.log(arg);

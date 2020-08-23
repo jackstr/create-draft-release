@@ -7,7 +7,7 @@ import {promisify} from "util";
 
 const readFile = promisify(fs.readFile);
 
-type Conf = {
+export type Conf = {
     srcDirPath: Path
     changelogFilePath: Path
     pageSize: number
@@ -15,7 +15,7 @@ type Conf = {
     ownerAndRepo: string
     token: string
 }
-type Path = string;
+export type Path = string;
 export type TagName = string;
 
 type GitHubClient = ReturnType<typeof github.getOctokit> & {repoMeta: typeof github.context.repo};
@@ -79,7 +79,7 @@ export function conf(): Conf {
 }
 
 // Taken from TypeScript sources, https://github.com/microsoft/TypeScript
-function memoize<TRes>(callback: () => TRes): () => TRes {
+export function memoize<TRes>(callback: () => TRes): () => TRes {
     let value: TRes;
     return () => {
         if (callback) {

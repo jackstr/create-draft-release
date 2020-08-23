@@ -29,18 +29,17 @@ async function main() {
         let header: lib.ChangelogHeader | null = null;
         const block = await lib.processFileLines(lib.conf().changelogFilePath, line => {
             if (text.length) {
+                if (lib.SemverHeader.match(line) || lib.WeeklyVerHeader.match(line)) {
+                    return text;
+                }
+                text.push(line);
+            } else if (line.length) {
                 if (lib.SemverHeader.match(line)) {
                     header = new lib.SemverHeader(line);
                 } else if (lib.WeeklyVerHeader.match(line)) {
                     header = new lib.WeeklyVerHeader(line);
                 }
                 if (header) {
-                    return text;
-                }
-                text.push(line);
-            } else if (line.length) {
-                let match = lib.SemverHeader.match(line) || lib.WeeklyVerHeader.match(line);
-                if (match) {
                     text.push(line);
                 }
             }
