@@ -1,0 +1,5 @@
+name: Creates draft release
+description: Creates a draft release with latest changes from CHANGELOG.md
+runs:
+  using: 'node12'
+  main: 'index.js'
